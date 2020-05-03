@@ -154,9 +154,30 @@ class Build : NukeBuild
 
 
 
+    Target Ready => _ => _
+        .DependsOn(MakeSyrup)
+        .Executes(() =>
+
+        {
+            var p = Projects.FirstOrDefault(x => x.Project == MinimalCefProject);
+            if (p == null) return;
+            var tmpMerge = TmpBuild / CommonDir.Merge / p.Dir;
+            var tmpReady = TmpBuild / CommonDir.Ready;
+            var fileName = $"{p.Name}-{AbcVersion.SemVersion}.exe";
+            var fileSrc = tmpMerge / p.Exe;
+            var fileDst = tmpReady / fileName;
+
+
+            EnsureExistingDirectory(tmpReady);
+            CopyFile(fileSrc,fileDst, FileExistsPolicy.Overwrite);
+
+            
+        });
+
+
 
     Target Zip => _ => _
-        .DependsOn(MakeSyrup)
+        .DependsOn(Ready)
         .Executes(() =>
 
         {
@@ -188,7 +209,7 @@ class Build : NukeBuild
 
 
     Target PublishLocalStandalone => _ => _
-        .DependsOn(MakeSyrup)
+        .DependsOn(Ready)
         .Executes(() =>
         {
             var p = Projects.FirstOrDefault(x => x.Project == MinimalCefProject);
