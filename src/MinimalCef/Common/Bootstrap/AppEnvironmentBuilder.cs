@@ -20,9 +20,7 @@ namespace MinimalCef.Common.Bootstrap
         private const string _DEV_FILE = "dev.json";
         private const string _CONFIG_DIR = "config";
         private const string _DROP_BOX_DIR = "Dropbox";
-        private const string _ANTI_PIRACY_GLOBAL_DIR = "AntiPiracy";
-        private const string _ANTI_PIRACY_GLOBAL_MAIN_DIR = "main";
-        private const string _ANTI_PIRACY_GLOBAL_DB_DIR = "db";
+        private const string GLOBAL_MAIN_DIR = "main";
         private static readonly AppEnvironmentBuilder _instance = new AppEnvironmentBuilder();
 
         private static AppEnvironment _appEnvironmentValue;
@@ -132,13 +130,12 @@ namespace MinimalCef.Common.Bootstrap
         private static string GetOrganizationGlobalDir()
         {
             var appDataLocalDir = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-            var antiPiracyGlobalDir = Path.Combine(appDataLocalDir, _ANTI_PIRACY_GLOBAL_DIR);
-            return antiPiracyGlobalDir;
+            return appDataLocalDir;
         }
 
         private static string GetOrganizationMainDir(string organizationGlobalDir)
         {
-            var organizationMainDir = Path.Combine(organizationGlobalDir, _ANTI_PIRACY_GLOBAL_MAIN_DIR);
+            var organizationMainDir = Path.Combine(organizationGlobalDir, GLOBAL_MAIN_DIR);
             return organizationMainDir;
         }
 

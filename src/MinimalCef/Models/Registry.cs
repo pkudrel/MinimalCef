@@ -17,9 +17,10 @@ namespace MinimalCef.Models
             GlobalBrowserSubprocessPath = Path.Combine(GlobalCefSharpEnvPath, "CefSharp.BrowserSubprocess.exe");
             LocalCefSharpEnvPath = env.ExeFileDir;
             LocalBrowserSubprocessPath = Path.Combine(LocalCefSharpEnvPath, "CefSharp.BrowserSubprocess.exe");
+            UseGlobalBrowserSubprocess = config.UseGlobalBrowserSubprocess;
             Io.CreateDirIfNotExist(CefSharpEnvStorePath);
         }
-
+        public bool UseGlobalBrowserSubprocess { get; set; }
         public string CefSharpLocalePath { get; }
         public PackageConfig PackageConfig { get; }
         public string GlobalBrowserSubprocessPath { get; }

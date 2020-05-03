@@ -28,15 +28,19 @@ namespace MinimalCef
                 Cef.CefVersion, Cef.CefSharpVersion, bitness);
         }
 
-        private void OnIsBrowserInitializedChanged(object sender, IsBrowserInitializedChangedEventArgs e)
+        private void OnIsBrowserInitializedChanged(object sender, EventArgs e)
         {
-            if (e.IsBrowserInitialized)
-            {
-                var b = (ChromiumWebBrowser) sender;
+            //if (e.IsBrowserInitialized)
+            //{
+            //    var b = (ChromiumWebBrowser)sender;
 
-                this.InvokeOnUiThreadIfRequired(() => b.Focus());
-            }
+            //    this.InvokeOnUiThreadIfRequired(() => b.Focus());
+            //}
+
+            var d = e;
         }
+
+      
 
         private void Form1_Load(object sender, EventArgs e)
         {

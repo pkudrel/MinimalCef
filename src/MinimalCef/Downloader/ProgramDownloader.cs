@@ -27,6 +27,7 @@ namespace MinimalCef.Downloader
 
             sw.Reset();
 
+            if (reg.UseGlobalBrowserSubprocess) return;
             if (File.Exists(reg.LocalBrowserSubprocessPath)) return;
             _log.Debug($"Create local CefSharpEnv in: {reg.LocalCefSharpEnvPath}");
             sw.Start();
