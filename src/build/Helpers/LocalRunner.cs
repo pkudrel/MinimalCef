@@ -23,7 +23,7 @@ namespace Helpers
 
         public List<Output> Run(
             [CanBeNull] string arguments,
-            [CanBeNull] string workingDirectory,    
+            [CanBeNull] string workingDirectory,
             int? timeout = null,
             bool logOutput = true,
             Func<string, LogLevel> logLevelParser = null,
@@ -89,10 +89,12 @@ namespace Helpers
             var process = Process.Start(startInfo);
             if (process == null)
                 return null;
-
-            var output = GetOutputCollection(process, logOutput, logLevelParser, outputFilter);
-            return new Process2(process, outputFilter, timeout, output);
+            string logFile = null;
+            var logStream = logFile != null ? new StreamWriter(File.Open(logFile, FileMode.Create)) : null;
+            BlockingCollection<Output> output = GetOutputCollection(process, logOutput, logLevelParser, outputFilter);
+            return new Process2(process, outputFilter, timeout, logStream, output);
         }
+
 
         private static BlockingCollection<Output> GetOutputCollection(
             Process process,
@@ -120,7 +122,7 @@ namespace Helpers
                             Logger.Trace(text);
                             break;
                         case LogLevel.Normal:
-                            Logger.Normal(text);
+                            Logger.Info(text);
                             break;
                         case LogLevel.Warning:
                             Logger.Warn(text);

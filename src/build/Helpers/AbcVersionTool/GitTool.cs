@@ -10,7 +10,7 @@ namespace AbcVersionTool
 {
     public class GitTool
     {
-        static readonly PathConstruction.AbsolutePath _rootPath = NukeBuild.RootDirectory;
+        static readonly AbsolutePath _rootPath = NukeBuild.RootDirectory;
         static readonly LocalRunner _gitLocalRunner = new LocalRunner(GitTasks.GitPath);
 
 

@@ -9,8 +9,8 @@ namespace AbcVersionTool
     public static class AbcVersionFactory
     {
         const string _CONFIG_FILE = ".abcversion.json";
-        static readonly PathConstruction.AbsolutePath _rootPath = NukeBuild.RootDirectory;
-        static readonly PathConstruction.AbsolutePath _configPath = _rootPath / _CONFIG_FILE;
+        static readonly AbsolutePath _rootPath = NukeBuild.RootDirectory;
+        static readonly AbsolutePath _configPath = _rootPath / _CONFIG_FILE;
         static readonly DateTime _dateTime = DateTime.UtcNow;
         static readonly string _env = EnvironmentInfo.MachineName;
         static AbcVersion AbcVersion;
