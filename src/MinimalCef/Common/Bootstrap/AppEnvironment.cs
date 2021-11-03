@@ -2,15 +2,12 @@
 {
     public class AppEnvironment
     {
-        public string WorkDir { get; set; }
+       
         public string AssemblyName { get; set; }
         public string AssemblyFilePath { get; set; }
         public string ExeFileDir { get; set; }
-        public string SyrupDir { get; set; }
-        public bool IsSyrup { get; set; }
         public string ConfigDir { get; set; }
         public string VarDir { get; set; }
-        public string GlobalDir { get; set; }
         public bool IsDebug { get; set; }
         public string GitDir { get; set; }
         public string RootDir { get; set; }

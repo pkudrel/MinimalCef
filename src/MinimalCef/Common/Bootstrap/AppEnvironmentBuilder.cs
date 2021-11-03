@@ -19,7 +19,7 @@ namespace MinimalCef.Common.Bootstrap
         private const string _SYRUP_DIR = ".syrup";
         private const string _DEV_FILE = "dev.json";
         private const string _CONFIG_DIR = "config";
-        private const string _DROP_BOX_DIR = "Dropbox";
+   
         private const string GLOBAL_MAIN_DIR = "main";
         private static readonly AppEnvironmentBuilder _instance = new AppEnvironmentBuilder();
 
@@ -66,17 +66,15 @@ namespace MinimalCef.Common.Bootstrap
             res.ExeFileDir = Path.GetDirectoryName(res.AssemblyFilePath);
             res.CommandLineArgs = Environment.GetCommandLineArgs();
 
-            // syrup
-            res.SyrupDir = FindDir(res.ExeFileDir, _SYRUP_DIR);
-            res.IsSyrup = !string.IsNullOrEmpty(res.SyrupDir);
+           
 
             // dev
             res.DevDir = FindDir(res.ExeFileDir, _DEV_DIR);
             var dv = GetDevSettings(res.DevDir);
-            res.IsDeveloperMode = IsDeveloperMode(res.IsSyrup, res.DevDir, dv);
+           
 
             // root
-            res.RootDir = GetRoot(res.ExeFileDir, res.SyrupDir, res.DevDir, dv);
+            res.RootDir = GetRoot(res.ExeFileDir,  res.DevDir, dv);
 
             // important dev dirs
             res.GitDir = FindDir(res.RootDir, _GIT_DIR);
@@ -86,8 +84,7 @@ namespace MinimalCef.Common.Bootstrap
             res.LogDir = GetSimpleDir(res.RootDir, _LOG_DIR, res.IsDeveloperMode);
             res.ConfigDir = GetSimpleDir(res.RootDir, _CONFIG_DIR, res.IsDeveloperMode);
             res.VarDir = GetDir(res.RootDir, _VAR_DIR);
-            res.WorkDir = GetDir(res.RootDir, _WORK_DIR);
-            res.GlobalDir = GetGlobalDir(res.RootDir);
+            
             res.OrganizationGlobalDir = GetOrganizationGlobalDir();
             res.OrganizationMainDir = GetOrganizationMainDir(res.OrganizationGlobalDir);
             res.LocalApplicationData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
@@ -119,12 +116,7 @@ namespace MinimalCef.Common.Bootstrap
             return res.OrganizationGlobalDir;
         }
 
-        private static string GetGlobalDir(string rootDir)
-        {
-            var userProfile = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-            var dropboxPath = Path.Combine(userProfile, _DROP_BOX_DIR);
-            return Directory.Exists(dropboxPath) ? dropboxPath : Path.Combine(rootDir, _GLOBAL_DIR);
-        }
+       
 
 
         private static string GetOrganizationGlobalDir()
@@ -168,10 +160,9 @@ namespace MinimalCef.Common.Bootstrap
         }
 
 
-        private static string GetRoot(string appDir, string syrupDir, string devDir, DeveloperConfig dv)
+        private static string GetRoot(string appDir,  string devDir, DeveloperConfig dv)
         {
-            // syrup is present - use syrup
-            if (!string.IsNullOrEmpty(syrupDir)) return new DirectoryInfo(syrupDir).Parent?.FullName;
+           
             if (!string.IsNullOrEmpty(devDir))
             {
                 var vsAppDir = Path.Combine(devDir, dv.DevSubdir);

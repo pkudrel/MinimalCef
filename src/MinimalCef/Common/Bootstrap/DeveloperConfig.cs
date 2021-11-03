@@ -4,7 +4,7 @@
     {
         public bool IgnoreMe { get; set; }
         public bool DevMode { get; set; }
-        public string DevSubdir { get; set; }
+        public string DevSubdir { get; set; } = "app.vs";
 
 
     }

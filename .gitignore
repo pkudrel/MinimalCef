@@ -56,3 +56,5 @@ src/.vs/*
 src/.vscode/
 .tmp/
 src/build/.vscode/
+artifacts/*
+.nuke/temp/*

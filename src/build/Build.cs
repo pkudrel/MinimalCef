@@ -2,11 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using AbcVersionTool;
 using Helpers;
-using Helpers.Azure;
-using Helpers.Syrup;
 using Nuke.Common;
 using Nuke.Common.Execution;
 using Nuke.Common.Git;
@@ -44,10 +41,8 @@ class Build : NukeBuild
     [Solution] readonly Solution Solution;
 
 
-    AbsolutePath SourceDirectory => RootDirectory / "src";
-    AbsolutePath ArtifactsDirectory => RootDirectory / "artifacts";
     AbsolutePath ToolsDir => RootDirectory / "tools";
-    AbsolutePath DevDir => RootDirectory / "dev";
+
     AbsolutePath LibzPath => ToolsDir / "LibZ.Tool" / "tools" / "libz.exe";
     AbsolutePath ZipPath => ToolsDir / "7zip" / "7za.exe";
     AbsolutePath NugetPath => ToolsDir / "nuget.exe";
@@ -216,10 +211,9 @@ class Build : NukeBuild
             if (p == null) return;
             var tmpMerge = TmpBuild / CommonDir.Merge / p.Dir;
             var tmpMergeFile = tmpMerge / p.Exe;
-            var devStandalone = DevDir / "app.standolone";
-            var devStandaloneFile = devStandalone / p.Exe;
-            EnsureExistingDirectory(devStandalone);
-            CopyFile(tmpMergeFile, devStandaloneFile, FileExistsPolicy.Overwrite);
+            var artifactsDir = ArtifactsDir / p.Exe;
+            EnsureExistingDirectory(ArtifactsDir);
+            CopyFile(tmpMergeFile, artifactsDir, FileExistsPolicy.Overwrite);
         });
 
 
