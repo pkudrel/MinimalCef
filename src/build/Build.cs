@@ -171,33 +171,7 @@ class Build : NukeBuild
 
 
 
-    Target Zip => _ => _
-        .DependsOn(Ready)
-        .Executes(() =>
 
-        {
-            var p = Projects.FirstOrDefault(x => x.Project == MinimalCefProject);
-            if (p == null) return;
-            var tmpMerge = TmpBuild / CommonDir.Merge / p.Dir;
-            var tmpZip = TmpBuild / CommonDir.Zip / p.Dir;
-
-            var tmpReady = TmpBuild / CommonDir.Ready;
-            var fileName = $"{p.Name}-{AbcVersion.SemVersion}.zip";
-
-            EnsureExistingDirectory(tmpZip);
-            EnsureExistingDirectory(tmpReady);
-
-
-            using (var process = ProcessTasks.StartProcess(
-                ZipPath,
-                $"a {fileName} {tmpMerge / p.Exe}",
-                tmpZip))
-            {
-                process.AssertWaitForExit();
-                ControlFlow.AssertWarn(process.ExitCode == 0,
-                    "Zip report generation process exited with some errors.");
-            }
-        });
 
 
 
@@ -218,7 +192,7 @@ class Build : NukeBuild
 
 
     Target Publish => _ => _
-        .DependsOn( Zip, PublishLocal);
+        .DependsOn( PublishLocal);
 
 
     Target PublishLocal => _ => _
