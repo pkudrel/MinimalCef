@@ -85,8 +85,7 @@
               "PublishLocal",
               "PublishLocalStandalone",
               "Ready",
-              "Restore",
-              "Zip"
+              "Restore"
             ]
           }
         },
@@ -110,8 +109,7 @@
               "PublishLocal",
               "PublishLocalStandalone",
               "Ready",
-              "Restore",
-              "Zip"
+              "Restore"
             ]
           }
         },

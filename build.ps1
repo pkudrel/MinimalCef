@@ -51,17 +51,6 @@ else {
         if ($DotNetGlobal.PSObject.Properties["sdk"] -and $DotNetGlobal.sdk.PSObject.Properties["version"]) {
             $DotNetVersion = $DotNetGlobal.sdk.version
         }
-<<<<<<< HEAD
-    }
-
-    # Install by channel or version
-    $DotNetDirectory = "$TempDirectory\dotnet-win"
-    if (!(Test-Path variable:DotNetVersion)) {
-        ExecSafe { & $DotNetInstallFile -InstallDir $DotNetDirectory -Channel $DotNetChannel -NoPath }
-    } else {
-        ExecSafe { & $DotNetInstallFile -InstallDir $DotNetDirectory -Version $DotNetVersion -NoPath }
-    }
-=======
     }
 
     # Install by channel or version
@@ -71,7 +60,6 @@ else {
     } else {
         ExecSafe { & powershell $DotNetInstallFile -InstallDir $DotNetDirectory -Version $DotNetVersion -NoPath }
     }
->>>>>>> f397afe5fedd9a70b859ef0dbae3289201f012df
     $env:DOTNET_EXE = "$DotNetDirectory\dotnet.exe"
 }
 
