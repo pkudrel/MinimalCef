@@ -56,8 +56,5 @@ src/.vs/*
 src/.vscode/
 .tmp/
 src/build/.vscode/
-<<<<<<< HEAD
-=======
 artifacts/*
->>>>>>> f397afe5fedd9a70b859ef0dbae3289201f012df
 .nuke/temp/*
