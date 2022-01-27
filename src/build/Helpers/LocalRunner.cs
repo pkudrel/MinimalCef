@@ -23,7 +23,7 @@ namespace Helpers
 
         public List<Output> Run(
             [CanBeNull] string arguments,
-            [CanBeNull] string workingDirectory,    
+            [CanBeNull] string workingDirectory,
             int? timeout = null,
             bool logOutput = true,
             Func<string, LogLevel> logLevelParser = null,
@@ -71,7 +71,8 @@ namespace Helpers
             [CanBeNull] Func<string, LogLevel> logLevelParser,
             [CanBeNull] Func<string, string> outputFilter)
         {
-            ControlFlow.Assert(workingDirectory == null || Directory.Exists(workingDirectory),
+
+            Assert.True(workingDirectory == null || Directory.Exists(workingDirectory),
                 $"WorkingDirectory '{workingDirectory}' does not exist.");
 
             var startInfo = new ProcessStartInfo
@@ -90,9 +91,11 @@ namespace Helpers
             if (process == null)
                 return null;
 
-            var output = GetOutputCollection(process, logOutput, logLevelParser, outputFilter);
+
+            BlockingCollection<Output> output = GetOutputCollection(process, logOutput, logLevelParser, outputFilter);
             return new Process2(process, outputFilter, timeout, output);
         }
+
 
         private static BlockingCollection<Output> GetOutputCollection(
             Process process,
@@ -117,16 +120,16 @@ namespace Helpers
                     switch (logLevel)
                     {
                         case LogLevel.Trace:
-                            Logger.Trace(text);
+                            Serilog.Log.Verbose(text);
                             break;
                         case LogLevel.Normal:
-                            Logger.Normal(text);
+                            Serilog.Log.Information(text);
                             break;
                         case LogLevel.Warning:
-                            Logger.Warn(text);
+                            Serilog.Log.Warning(text);
                             break;
                         case LogLevel.Error:
-                            Logger.Error(text);
+                            Serilog.Log.Error(text);
                             break;
                     }
                 }
@@ -139,7 +142,7 @@ namespace Helpers
                 output.Add(new Output { Text = e.Data, Type = OutputType.Err });
 
                 if (logOutput)
-                    Logger.Error(outputFilter(e.Data));
+                    Serilog.Log.Error(outputFilter(e.Data));
             };
 
             process.BeginOutputReadLine();

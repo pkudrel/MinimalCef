@@ -16,23 +16,21 @@ namespace MinimalCef
         {
             return new PackageConfig
             {
-                Name = "cefsharp_88.2.9_x64",
+                Name = "cefsharp_97.1.6_x64",
                 Nugets = new List<NugetInfo>
                 {
-                    new NugetInfo("CefSharp.Common", "88.2.90",
+                    new NugetInfo("CefSharp.Common", "97.1.60",
                         new List<CopyInfo>
                         {
                             new CopyInfo("/CefSharp/x64", "/"),
-                            new CopyInfo("/lib/net452", "/"),
-
-
+                            new CopyInfo("/lib/net452", "/")
                         }),
 
-                    new NugetInfo("CefSharp.WinForms", "88.2.90",
-                        new List<CopyInfo> {new CopyInfo("/lib/net452", "/")}),
+                    new NugetInfo("CefSharp.WinForms", "97.1.60",
+                        new List<CopyInfo> { new CopyInfo("/lib/net452", "/") }),
 
 
-                    new NugetInfo("cef.redist.x64", "88.2.9",
+                    new NugetInfo("cef.redist.x64", "97.1.6",
                         new List<CopyInfo>
                         {
                             new CopyInfo("/CEF", "/"),

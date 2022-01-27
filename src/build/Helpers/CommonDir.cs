@@ -24,8 +24,8 @@ namespace Helpers
         public static CommonDir Zip { get; } = new CommonDir("zip");
         
 
-        public static PathConstruction.AbsolutePath operator /(
-            PathConstruction.AbsolutePath path1,
+        public static AbsolutePath operator /(
+            AbsolutePath path1,
             [CanBeNull] CommonDir commonDir)
         {
             return path1 / (commonDir?.Name ?? string.Empty);

@@ -88,6 +88,7 @@ namespace MinimalCef
             _log.Debug($"Find: '{dll}' in '{_reg.GlobalCefSharpEnvPath}'");
             switch (dll)
             {
+                case "CefSharp.Core.Runtime.dll":
                 case "CefSharp.Core.dll":
                 case "CefSharp.dll":
                     var path = Path.Combine(_reg.GlobalCefSharpEnvPath, dll);

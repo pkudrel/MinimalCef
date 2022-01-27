@@ -44,8 +44,7 @@ class Build : NukeBuild
     [Solution] readonly Solution Solution;
 
 
-    AbsolutePath SourceDirectory => RootDirectory / "src";
-    AbsolutePath ArtifactsDirectory => RootDirectory / "artifacts";
+
     AbsolutePath ToolsDir => RootDirectory / "tools";
     AbsolutePath DevDir => RootDirectory / "dev";
     AbsolutePath LibzPath => ToolsDir / "LibZ.Tool" / "tools" / "libz.exe";
@@ -84,12 +83,12 @@ class Build : NukeBuild
         .Executes(() =>
         {
             var b = AbcVersion;
-            Logger.Normal($"Host: '{Host}'");
-            Logger.Normal($"Version: '{b.SemVersion}'");
-            Logger.Normal($"Date: '{b.DateTime:s}Z'");
-            Logger.Normal($"FullVersion: '{b.InformationalVersion}'");
-            Logger.Normal($"env:Agent.Name: '{Environment.GetEnvironmentVariable("AGENT_NAME")}'");
-            Logger.Normal(
+            Serilog.Log.Debug($"Host: '{Host}'");
+            Serilog.Log.Debug($"Version: '{b.SemVersion}'");
+            Serilog.Log.Debug($"Date: '{b.DateTime:s}Z'");
+            Serilog.Log.Debug($"FullVersion: '{b.InformationalVersion}'");
+            Serilog.Log.Debug($"env:Agent.Name: '{Environment.GetEnvironmentVariable("AGENT_NAME")}'");
+            Serilog.Log.Debug(
                 $"env:Build.ArtifactStagingDirectory: '{Environment.GetEnvironmentVariable("BUILD_ARTIFACTSTAGINGDIRECTORY")}'");
         });
 
@@ -99,9 +98,9 @@ class Build : NukeBuild
         .OnlyWhenStatic(() => IsAzureDevOps)
         .Executes(() =>
         {
-            Logger.Normal($"Set version to AzureDevOps: {AbcVersion.SemVersion}");
+            Serilog.Log.Debug($"Set version to AzureDevOps: {AbcVersion.SemVersion}");
             // https://github.com/microsoft/azure-pipelines-tasks/blob/master/docs/authoring/commands.md
-            Logger.Normal($"##vso[build.updatebuildnumber]{AbcVersion.SemVersion}");
+            Serilog.Log.Debug($"##vso[build.updatebuildnumber]{AbcVersion.SemVersion}");
         });
 
     Target Configure => _ => _
@@ -135,8 +134,7 @@ class Build : NukeBuild
                 SourceDir))
             {
                 process.AssertWaitForExit();
-                ControlFlow.AssertWarn(process.ExitCode == 0,
-                    "Nuget restore report generation process exited with some errors.");
+               
             }
         });
 
@@ -199,8 +197,8 @@ class Build : NukeBuild
                 tmpZip))
             {
                 process.AssertWaitForExit();
-                ControlFlow.AssertWarn(process.ExitCode == 0,
-                    "Zip report generation process exited with some errors.");
+
+              
             }
         });
 
@@ -239,11 +237,11 @@ class Build : NukeBuild
         var projectFile = p.Project.Path;
         var projectDir = Path.GetDirectoryName(projectFile);
         EnsureExistingDirectory(buildOut);
-        Logger.Normal($"Build; Project file: {projectFile}");
-        Logger.Normal($"Build; Project dir: {projectDir}");
-        Logger.Normal($"Build; Out dir: {buildOut}");
-        Logger.Normal($"Build; Target: {Configuration}");
-        Logger.Normal($"Build; Target: {GitRepository.Branch}");
+        Serilog.Log.Debug($"Build; Project file: {projectFile}");
+        Serilog.Log.Debug($"Build; Project dir: {projectDir}");
+        Serilog.Log.Debug($"Build; Out dir: {buildOut}");
+        Serilog.Log.Debug($"Build; Target: {Configuration}");
+        Serilog.Log.Debug($"Build; Target: {GitRepository.Branch}");
 
         AssemblyTools.Patch(projectDir, AbcVersion, p, ProductInfo);
 
@@ -287,8 +285,7 @@ class Build : NukeBuild
             margeOut))
         {
             process.AssertWaitForExit();
-            ControlFlow.AssertWarn(process.ExitCode == 0,
-                "Libz report generation process exited with some errors.");
+            
         }
     }
 
