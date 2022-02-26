@@ -8,7 +8,7 @@ namespace MinimalCef
     {
         public static Config Create()
         {
-            var ret = new Config {PackageConfig = GetPackageConfig(), UseGlobalBrowserSubprocess = true};
+            var ret = new Config { PackageConfig = GetPackageConfig(), UseGlobalBrowserSubprocess = true };
             return ret;
         }
 
@@ -16,21 +16,21 @@ namespace MinimalCef
         {
             return new PackageConfig
             {
-                Name = "cefsharp_97.1.6_x64",
+                Name = "cefsharp_98.1.21_x64",
                 Nugets = new List<NugetInfo>
                 {
-                    new NugetInfo("CefSharp.Common", "97.1.60",
+                    new NugetInfo("CefSharp.Common", "98.1.210",
                         new List<CopyInfo>
                         {
                             new CopyInfo("/CefSharp/x64", "/"),
                             new CopyInfo("/lib/net452", "/")
                         }),
 
-                    new NugetInfo("CefSharp.WinForms", "97.1.60",
+                    new NugetInfo("CefSharp.WinForms", "98.1.210",
                         new List<CopyInfo> { new CopyInfo("/lib/net452", "/") }),
 
 
-                    new NugetInfo("cef.redist.x64", "97.1.6",
+                    new NugetInfo("cef.redist.x64", "98.1.21",
                         new List<CopyInfo>
                         {
                             new CopyInfo("/CEF", "/"),
