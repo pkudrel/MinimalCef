@@ -72,7 +72,7 @@ namespace MinimalCef
             //Example of setting a command line argument
             //Enables WebRTC
             settings.CefCommandLineArgs.Add("enable-media-stream", "1");
-
+           //  settings.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36";
             //Perform dependency check to make sure all relevant resources are in our output directory.
             Cef.Initialize(settings, false, browserProcessHandler: null);
 
@@ -84,7 +84,7 @@ namespace MinimalCef
         {
             var location = typeof(Program).Assembly.Location;
             _log.Debug($"CurrentDomain_AssemblyResolve Location: '{location}'");
-            var dll = args.Name.Split(new[] {','}, 2)[0] + ".dll";
+            var dll = args.Name.Split(new[] { ',' }, 2)[0] + ".dll";
             _log.Debug($"Find: '{dll}' in '{_reg.GlobalCefSharpEnvPath}'");
             switch (dll)
             {
