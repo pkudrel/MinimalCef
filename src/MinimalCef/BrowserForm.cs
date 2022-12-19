@@ -12,7 +12,8 @@ namespace MinimalCef
        //public static string url = "https://www.whatismybrowser.com/detect/what-is-my-user-agent/";
        //public static string url = "https://membed.net/streaming.php?id=MjkxODQy&title=Bob%27s+Burgers+-+Season+10+Episode+5+-+Legends+of+the+Mall&typesub=SUB&sub=L2JvYnMtYnVyZ2Vycy1zZWFzb24tMTAtZXBpc29kZS01LWxlZ2VuZHMtb2YtdGhlLW1hbGwvYm9icy1idXJnZXJzLXNlYXNvbi0xMC1lcGlzb2RlLTUtbGVnZW5kcy1vZi10aGUtbWFsbC52dHQ=&cover=Y292ZXIvYm9icy1idXJnZXJzLXNlYXNvbi0xMC5wbmc=";
         //public static string url = "https://github.com/antoinevastel/fpscanner";
-        public static string url = "https://bot.sannysoft.com/";
+       // public static string url = "https://bot.sannysoft.com/";
+        public static string url = "https://seriesyonkis.nu/episode/star-wars-andor-1x9/";
         //public static string url = "https://membed.net/streaming.php?id=MjkxODQy";
         private ChromiumWebBrowser _browser;
 
