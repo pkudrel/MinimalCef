@@ -16,6 +16,33 @@ namespace MinimalCef
         {
             return new PackageConfig
             {
+                Name = "cefsharp_108.4.13_x64",
+                Nugets = new List<NugetInfo>
+                {
+                    new NugetInfo("CefSharp.Common", "108.4.130",
+                        new List<CopyInfo>
+                        {
+                            new CopyInfo("/CefSharp/x64", "/"),
+                            new CopyInfo("/lib/net452", "/")
+                        }),
+
+                    new NugetInfo("CefSharp.WinForms", "108.4.130",
+                        new List<CopyInfo> {new CopyInfo("/lib/net452", "/")}),
+
+
+                    new NugetInfo("cef.redist.x64", "108.4.13",
+                        new List<CopyInfo>
+                        {
+                            new CopyInfo("/CEF", "/"),
+                            new CopyInfo("/CEF/locales", "/locales"),
+                            //new CopyInfo("/CEF/swiftshader", "/swiftshader")
+                        })
+                }
+            };
+
+
+            return new PackageConfig
+            {
                 Name = "cefsharp_103.0.9_x64",
                 Nugets = new List<NugetInfo>
                 {
